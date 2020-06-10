@@ -113,4 +113,43 @@
         </plugins>
     </build>
 
+    <!-- 仓库配置 -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://localhost:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <!-- 插件配置 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus</id>
+            <url>http://localhost:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- 发布配置 在执行mvn deploy后表示要发布的位置 mvn clean deploy -DskipTests -->
+    <distributionManagement>
+        <repository>
+            <id>rdc-releases</id>
+            <url>https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/</url>
+        </repository>
+        <snapshotRepository>
+            <id>rdc-snapshots</id>
+            <url>https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
