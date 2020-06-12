@@ -47,15 +47,15 @@ public class DingTalkNotifier extends AbstractStatusChangeNotifier {
 
 
     private HttpEntity<Map<String, Object>> createMessage(InstanceEvent event,Instance instance) {
-        Map<String, Object> messageJson = new HashMap<>();
-        HashMap<String, String> params = new HashMap<>();
+        Map<String, Object> messageJson = new HashMap<>(3);
+        HashMap<String, String> params = new HashMap<>(2);
         params.put("text", this.getMessage(event, instance));
         params.put("title", this.title);
         messageJson.put("atMobiles", this.atMobiles);
         messageJson.put("msgtype", this.msgtype);
         messageJson.put(this.msgtype, params);
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+        headers.setContentType(MediaType.APPLICATION_JSON);
         return new HttpEntity<>(messageJson, headers);
     }
 
