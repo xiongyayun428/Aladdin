@@ -24,9 +24,15 @@
 	</properties>
 
     <modules>
+        <module>aladdin-services</module>
+
         <module>aladdin-spring-boot-admin</module>
+        <module>aladdin-spring-cloud-bus</module>
+        <module>aladdin-spring-cloud-config</module>
         <module>aladdin-spring-cloud-eureka</module>
         <module>aladdin-spring-cloud-gateway</module>
+        <module>aladdin-spring-cloud-hystrix-dashboard</module>
+        <module>aladdin-spring-cloud-nacos</module>
     </modules>
 
     <dependencies>

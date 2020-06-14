@@ -8,10 +8,10 @@
 		<version>${revision}</version>
 		<relativePath>../</relativePath>
 	</parent>
-	<artifactId>aladdin-spring-cloud-gateway</artifactId>
+	<artifactId>aladdin-spring-cloud-bus</artifactId>
 	<packaging>jar</packaging>
-	<name>Aladdin Spring Cloud Gateway</name>
-	<description>雅典娜-API网关</description>
+	<name>Aladdin Spring Cloud Bus</name>
+	<description>消息总线</description>
 
 	<dependencies>
 		<!-- 健康监控 -->
@@ -38,22 +38,6 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- 路由 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency>
-		<!-- Gateway 熔断 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-		</dependency>
-		<!-- Gateway 限流，使用令牌桶算法 -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
-<!--		</dependency>-->
-
 		<!-- 注册中心客户端 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -63,6 +47,11 @@
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-bus</artifactId>
 		</dependency>
 	</dependencies>
 

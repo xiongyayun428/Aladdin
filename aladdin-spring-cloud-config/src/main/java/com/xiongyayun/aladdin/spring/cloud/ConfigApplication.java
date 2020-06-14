@@ -1,8 +1,10 @@
-package com.xiongyayun.aladdin.spring.cloud.gateway;
+package com.xiongyayun.aladdin.spring.cloud;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
@@ -10,17 +12,19 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * EurekaServerApplication
+ * ConfigApplication
  *
  * @author Yayun.Xiong
- * @date 2020/5/30
+ * @date 2020/6/14
  */
 @Slf4j
 @SpringBootApplication
-public class GatewayApplication {
+@EnableConfigServer
+@EnableEurekaClient
+public class ConfigApplication {
 
 	public static void main(String[] args) throws UnknownHostException {
-		ConfigurableApplicationContext context = SpringApplication.run(GatewayApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(ConfigApplication.class, args);
 		Environment env = context.getEnvironment();
 		String port = env.getProperty("server.port"), contextPath = env.getProperty("server.servlet.context-path", "");
 		log.info("\n--------------------------------------------------------------------------------------------------------------------\n\t" +

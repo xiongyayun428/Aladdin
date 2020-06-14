@@ -8,10 +8,10 @@
 		<version>${revision}</version>
 		<relativePath>../</relativePath>
 	</parent>
-	<artifactId>aladdin-spring-cloud-eureka</artifactId>
+	<artifactId>aladdin-spring-cloud-nacos</artifactId>
 	<packaging>jar</packaging>
-	<name>Aladdin Spring Cloud Eureka</name>
-	<description>Eureka服务注册中心</description>
+	<name>Aladdin Spring Cloud Nacos</name>
+	<description>Nacos服务注册中心</description>
 
 	<dependencies>
 		<dependency>
@@ -36,7 +36,7 @@
 			<!--scope包含如下的取值：compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围） -->
 			<scope>provided</scope>
 		</dependency>
-		<!-- 健康监控 -->
+		<!-- 健康监控 spring-boot-starter-actuator 管理工具/web 查看堆栈，动态刷新配置 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -46,26 +46,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
-		<!-- 热部署 -->
+		<!--热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
-			<optional>true</optional>
 		</dependency>
 
-		<!-- 注册中心服务端 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
+		<!-- 注册中心服务端-->
+
 		<!-- 提供注册中心用户名及密码的支持 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -75,6 +65,21 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>com.alibaba.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>com.alibaba.boot</groupId>-->
+<!--			<artifactId>nacos-config-spring-boot-starter</artifactId>-->
+<!--		</dependency>-->
+<!--		&lt;!&ndash; 启动服务发现 &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>com.alibaba.boot</groupId>-->
+<!--			<artifactId>nacos-discovery-spring-boot-starter</artifactId>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
