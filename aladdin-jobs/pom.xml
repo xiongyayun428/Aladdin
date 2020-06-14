@@ -10,7 +10,7 @@
     </parent>
     <artifactId>aladdin-jobs</artifactId>
     <packaging>pom</packaging>
-    <name>Aladdin Spring Boot Jobs</name>
+    <name>Aladdin Jobs</name>
     <description>任务调度</description>
 
 	<properties>

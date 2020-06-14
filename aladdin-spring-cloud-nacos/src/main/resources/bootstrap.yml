@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: aladdin-nacos
+  cloud:
+    nacos:
+      config:
+        server-addr

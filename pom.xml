@@ -24,6 +24,8 @@
 	</properties>
 
     <modules>
+        <module>aladdin-jobs</module>
+        <module>aladdin-platform</module>
         <module>aladdin-services</module>
 
         <module>aladdin-spring-boot-admin</module>

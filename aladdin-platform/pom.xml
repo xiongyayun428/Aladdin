@@ -10,7 +10,7 @@
     </parent>
     <artifactId>aladdin-platform</artifactId>
     <packaging>pom</packaging>
-    <name>Aladdin Spring Boot Platform</name>
+    <name>Aladdin Platform</name>
     <description>平台服务</description>
 
     <properties>

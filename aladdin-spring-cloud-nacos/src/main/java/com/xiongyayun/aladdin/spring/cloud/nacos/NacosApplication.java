@@ -1,4 +1,4 @@
-package com.xiongyayun.aladdin.spring.cloud.eureka;
+package com.xiongyayun.aladdin.spring.cloud.nacos;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -18,11 +18,10 @@ import java.net.UnknownHostException;
  */
 @Slf4j
 @SpringBootApplication
-//@EnableEurekaServer
-public class EurekaServerApplication {
+public class NacosApplication {
 
 	public static void main(String[] args) throws UnknownHostException {
-		ConfigurableApplicationContext context = SpringApplication.run(EurekaServerApplication.class, args);
+		ConfigurableApplicationContext context = SpringApplication.run(NacosApplication.class, args);
 		Environment env = context.getEnvironment();
 		String port = env.getProperty("server.port"), contextPath = env.getProperty("server.servlet.context-path", "");
 		log.info("\n--------------------------------------------------------------------------------------------------------------------\n\t" +
