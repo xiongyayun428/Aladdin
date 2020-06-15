@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
@@ -18,6 +19,7 @@ import java.net.UnknownHostException;
  */
 @Slf4j
 @SpringBootApplication
+@EnableDiscoveryClient
 public class NacosApplication {
 
 	public static void main(String[] args) throws UnknownHostException {
