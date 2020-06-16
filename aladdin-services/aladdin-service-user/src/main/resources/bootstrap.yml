@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: aladdin-nacos
   cloud:
     nacos:
       config:
@@ -8,9 +6,11 @@ spring:
         username: nacos
         password: nacos
         file-extension: "yaml"
-        group: "DEFAULT_GROUP"
-        namespace: "aliyun"
+        group: "DEV_GROUP"
+        namespace: "4386b803-ea26-4dcb-b7c5-951db0b64f52"
       discovery:
         server-addr: 47.107.179.245:8848
         username: nacos
         password: nacos
+        group: "DEV_GROUP"
+        namespace: "4386b803-ea26-4dcb-b7c5-951db0b64f52"

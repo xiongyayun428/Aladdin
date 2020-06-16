@@ -65,36 +65,56 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-        <!-- 注册中心客户端 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <!-- admin应用监控 -->
+        <!-- Eureka注册中心客户端 -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--        </dependency>-->
+        <!-- Admin应用监控 -->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
+        <!-- Nacos注册中心客户端 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- Nacos配置中心客户端 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- Sentinel流量控制 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
 
         <!-- 加密配置 -->
-        <dependency>
-            <groupId>com.github.ulisesbocchio</groupId>
-            <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.ulisesbocchio</groupId>-->
+<!--            <artifactId>jasypt-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba</groupId>-->
+<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>com.xiongyayun.boot</groupId>-->
+<!--            <artifactId>athena-spring-boot-starter-mybatis</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.xiongyayun.boot</groupId>
-            <artifactId>athena-spring-boot-starter-mybatis</artifactId>
+            <artifactId>athena-spring-boot-autoconfigure</artifactId>
         </dependency>
 
     </dependencies>

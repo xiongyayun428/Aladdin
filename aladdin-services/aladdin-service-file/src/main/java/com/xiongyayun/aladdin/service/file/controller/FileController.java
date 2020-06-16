@@ -2,6 +2,7 @@ package com.xiongyayun.aladdin.service.file.controller;
 
 import com.xiongyayun.aladdin.service.file.service.FileService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import java.io.File;
 @Slf4j
 @RestController
 @RequestMapping("/file")
+@RefreshScope
 public class FileController {
     @Resource
     private FileService fileService;
