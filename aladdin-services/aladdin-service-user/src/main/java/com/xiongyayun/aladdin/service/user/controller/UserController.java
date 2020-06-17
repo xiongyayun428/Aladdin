@@ -1,6 +1,7 @@
 package com.xiongyayun.aladdin.service.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.xiongyayun.aladdin.service.user.service.FileService;
 import com.xiongyayun.aladdin.service.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +26,9 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private FileService fileService;
+
     @Value("${server.port}")
     private String serverPort;
 
@@ -35,4 +39,14 @@ public class UserController {
         return "UserController get >" + serverPort;
     }
 
+    @GetMapping("/download")
+    @SentinelResource("download")
+    public String download() {
+        return fileService.download("a");
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "user index";
+    }
 }

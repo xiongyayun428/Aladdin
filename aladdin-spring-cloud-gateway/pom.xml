@@ -14,6 +14,10 @@
 	<description>雅典娜-API网关</description>
 
 	<dependencies>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--		</dependency>-->
 		<!-- 健康监控 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -38,31 +42,51 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- 路由 -->
+		<!-- Gateway 路由网关 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
-		<!-- Gateway 熔断 -->
+		<!-- Sentinel 网关限流 -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 		</dependency>
+		<!-- Sentinel 网关限流 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
+		</dependency>
+		<!-- Hystrix 熔断器 -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>-->
+<!--		</dependency>-->
 		<!-- Gateway 限流，使用令牌桶算法 -->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->
 <!--			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
 <!--		</dependency>-->
 
-		<!-- 注册中心客户端 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		<!-- Eureka注册中心客户端 -->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--		</dependency>-->
 		<!-- admin应用监控 -->
+<!--		<dependency>-->
+<!--			<groupId>de.codecentric</groupId>-->
+<!--			<artifactId>spring-boot-admin-starter-client</artifactId>-->
+<!--		</dependency>-->
+		<!-- Nacos注册中心客户端 -->
 		<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-starter-client</artifactId>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+		</dependency>
+		<!-- Nacos配置中心客户端 -->
+		<dependency>
+			<groupId>com.alibaba.cloud</groupId>
+			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 	</dependencies>
 

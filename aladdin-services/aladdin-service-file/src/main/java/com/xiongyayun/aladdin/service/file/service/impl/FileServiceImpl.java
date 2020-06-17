@@ -46,7 +46,7 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public void download(File file) {
-
+        System.out.println("-------download-----");
     }
 
     /**
@@ -57,7 +57,7 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public void download(File[] files, String zipName) {
-
+        System.out.println("-------download--2---");
     }
 
     /**
@@ -67,6 +67,6 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public void preview(File file) {
-
+        System.out.println("-------preview-----");
     }
 }
