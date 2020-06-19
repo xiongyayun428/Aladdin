@@ -18,6 +18,7 @@
 
     <modules>
         <module>aladdin-service-file</module>
+        <module>aladdin-service-id</module>
         <module>aladdin-service-system</module>
         <module>aladdin-service-user</module>
     </modules>

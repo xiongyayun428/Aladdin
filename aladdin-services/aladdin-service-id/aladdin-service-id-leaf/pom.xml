@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.xiongyayun.aladdin</groupId>
+        <artifactId>aladdin-service-id</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <artifactId>aladdin-service-id-leaf</artifactId>
+    <packaging>jar</packaging>
+    <name>Aladdin Service Leaf Snowflake ID</name>
+    <description>美团分布式ID生成服务</description>
+
+    <properties>
+        <main.basedir>${basedir}/../../..</main.basedir>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
+
+</project>
