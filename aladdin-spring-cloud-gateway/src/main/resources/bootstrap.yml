@@ -1,6 +1,10 @@
 spring:
+  application:
+    name: aladdin-gateway
+#    name: @artifactId@
   cloud:
     nacos:
+      # 配置的优先级 shared-configs < extension-configs < 内部相关规则
       config:
         server-addr: 10.0.1.25:80
         username: nacos
@@ -8,7 +12,22 @@ spring:
         file-extension: "yaml"
         group: "DEV_GROUP"
         namespace: "4386b803-ea26-4dcb-b7c5-951db0b64f52"
-#        shared-configs[0]:
-#          data-id: log.yml
-#          group: "DEV_GROUP"
-#          refresh: true
+        # 拓展配置集: 优先级大小的排序是extension-configs[n]中n越大优先级越大，配置集的配置值就越优先
+#        extension-configs:
+#          - data-id: log.yml
+#            group: "DEV_GROUP"
+#            refresh: true
+#          - data-id: springboot-admin-client.yaml
+#            group: "DEFAULT_GROUP"
+#            refresh: true
+        # 共享配置集
+        shared-configs:
+          - data-id: aladdin-common.yml
+            group: "DEFAULT_GROUP"
+            refresh: true
+          - data-id: log.yml
+            group: "DEV_GROUP"
+            refresh: true
+          - data-id: springboot-admin-client.yaml
+            group: "DEFAULT_GROUP"
+            refresh: true

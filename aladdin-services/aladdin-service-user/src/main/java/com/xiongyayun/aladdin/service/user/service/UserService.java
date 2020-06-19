@@ -8,6 +8,5 @@ import org.springframework.stereotype.Component;
  * @author Yayun.Xiong
  * @date 2020/6/14
  */
-@Component
-public class UserService {
+public interface UserService {
 }

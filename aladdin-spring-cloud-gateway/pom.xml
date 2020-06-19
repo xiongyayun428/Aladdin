@@ -11,13 +11,9 @@
 	<artifactId>aladdin-spring-cloud-gateway</artifactId>
 	<packaging>jar</packaging>
 	<name>Aladdin Spring Cloud Gateway</name>
-	<description>雅典娜-API网关</description>
+	<description>服务网关</description>
 
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-webflux</artifactId>-->
-<!--		</dependency>-->
 		<!-- 健康监控 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +53,11 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
 		</dependency>
+		<!-- Sleuth + Zipkin分布式请求链路跟踪 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
 		<!-- Hystrix 熔断器 -->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.cloud</groupId>-->
@@ -68,16 +69,11 @@
 <!--			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
 <!--		</dependency>-->
 
-		<!-- Eureka注册中心客户端 -->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
-<!--		</dependency>-->
 		<!-- admin应用监控 -->
-<!--		<dependency>-->
-<!--			<groupId>de.codecentric</groupId>-->
-<!--			<artifactId>spring-boot-admin-starter-client</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
 		<!-- Nacos注册中心客户端 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
@@ -87,6 +83,12 @@
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.xiongyayun.aladdin</groupId>
+			<artifactId>aladdin-common</artifactId>
+			<version>${revision}</version>
 		</dependency>
 	</dependencies>
 
