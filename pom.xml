@@ -92,6 +92,16 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <!--
+            https://github.com/ulisesbocchio/jasypt-spring-boot
+            加密: mvn jasypt:encrypt-value -Djasypt.encryptor.password="the password" -Djasypt.plugin.value="需要加密的值"
+            解密: mvn jasypt:decrypt-value -Djasypt.encryptor.password="the password" -Djasypt.plugin.value="需要解密的值"
+            -->
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+                <version>3.0.3</version>
+            </plugin>
             <!-- 添加flatten-maven-plugin用于替换${revision} -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

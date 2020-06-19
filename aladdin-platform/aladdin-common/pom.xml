@@ -4,22 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.xiongyayun.aladdin</groupId>
-        <artifactId>aladdin</artifactId>
+        <artifactId>aladdin-platform</artifactId>
         <version>${revision}</version>
-        <relativePath>../</relativePath>
     </parent>
-    <artifactId>aladdin-platform</artifactId>
-    <packaging>pom</packaging>
-    <name>Aladdin Platform</name>
-    <description>平台服务</description>
+    <artifactId>aladdin-common</artifactId>
+    <packaging>jar</packaging>
+    <name>Aladdin Platform common</name>
+    <description>公共服务</description>
 
     <properties>
-        <main.basedir>${basedir}/..</main.basedir>
+        <main.basedir>${basedir}/../..</main.basedir>
     </properties>
-
-    <modules>
-        <module>aladdin-common</module>
-    </modules>
 
     <dependencies>
 

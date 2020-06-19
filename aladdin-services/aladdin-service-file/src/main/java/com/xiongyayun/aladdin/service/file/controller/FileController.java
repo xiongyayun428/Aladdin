@@ -1,5 +1,6 @@
 package com.xiongyayun.aladdin.service.file.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.xiongyayun.aladdin.service.file.service.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -38,16 +39,19 @@ public class FileController {
     }
 
     @GetMapping("/download/{fileId}")
+    @SentinelResource("download/id")
     public void download(@PathVariable("fileId") String fileId) {
         this.fileService.download(getFileById(fileId));
     }
 
     @GetMapping("/download")
+    @SentinelResource("download")
     public void download(@RequestParam("fileId") String[] fileIds, @RequestParam(value = "zipName", defaultValue = "xxx") String zipName) {
         this.fileService.download(getFileByIds(fileIds), zipName);
     }
 
     @GetMapping("/preview/{fileId}")
+    @SentinelResource("preview")
     public void preview(@PathVariable("fileId") String fileId) {
         this.fileService.preview(getFileById(fileId));
     }

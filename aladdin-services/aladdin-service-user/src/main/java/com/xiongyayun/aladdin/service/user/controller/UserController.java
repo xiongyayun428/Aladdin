@@ -24,9 +24,6 @@ import javax.annotation.Resource;
 @RefreshScope
 public class UserController {
     @Resource
-    private UserService userService;
-
-    @Resource
     private FileService fileService;
 
     @Value("${server.port}")
@@ -40,7 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/download")
-    @SentinelResource("download")
+//    @SentinelResource("download")
     public String download() {
         return fileService.download("a");
     }

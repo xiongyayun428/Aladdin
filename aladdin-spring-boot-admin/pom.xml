@@ -10,14 +10,10 @@
 	</parent>
 	<artifactId>aladdin-spring-boot-admin</artifactId>
 	<packaging>jar</packaging>
-	<name>Aladdin Spring Boot Admin</name>
+	<name>Aladdin Spring Boot Admin Server</name>
 	<description>应用健康检查后台管理</description>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
 		<!--使用Undertow 替换内置 Tomcat-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -60,7 +56,7 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
+		<!-- 安全框架 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -73,21 +69,22 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui</artifactId>
 		</dependency>
-
+		<!-- 邮件 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
+		<!-- 加密 -->
 		<dependency>
 			<groupId>com.github.ulisesbocchio</groupId>
 			<artifactId>jasypt-spring-boot-starter</artifactId>
 		</dependency>
 
-		<!-- Nacos注册中心客户端 -->
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
+		<!-- Nacos注册中心客户端 (如果加了这个依赖，admin会监控自己，会出现问题) -->
+<!--		<dependency>-->
+<!--			<groupId>com.alibaba.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--		</dependency>-->
 		<!-- Nacos配置中心客户端 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
@@ -103,14 +100,11 @@
 				<executions>
 					<execution>
 						<goals>
+							<goal>repackage</goal>
 							<goal>build-info</goal>
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>com.github.ulisesbocchio</groupId>
-				<artifactId>jasypt-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
