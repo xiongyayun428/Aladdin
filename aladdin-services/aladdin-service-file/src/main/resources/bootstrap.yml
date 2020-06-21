@@ -4,7 +4,8 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 10.0.1.25:80
+        server-addr: 47.107.179.245:8848
+#        server-addr: 10.0.1.25:80
         username: nacos
         password: nacos
         file-extension: "yaml"
@@ -21,3 +22,28 @@ spring:
           - data-id: springboot-admin-client.yaml
             group: "DEFAULT_GROUP"
             refresh: true
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings:
+        input:
+          destination: xyyExhange
+          group: xyyGroup
+          # 消息类型
+          content-type: application/json
+          # 对应上面binders配置的值
+          binder: defaultRabbit
+#          producer:
+#            partitioned: true
+#            partition-key-expression: headers['partitionKey']
+#            partition-count: 2
+#            required-groups:
+#              - myGroup

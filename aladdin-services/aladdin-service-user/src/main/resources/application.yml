@@ -1,3 +1,24 @@
 spring:
   application:
     name: aladdin-service-user
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings:
+        output:
+          destination: xyyExhange
+          # 默认分组是不同的，组流水号不一样，如果不一样会出现重复消费
+          group: xyyGroup
+          # 消息类型
+          content-type: application/json
+          # 对应上面binders配置的值
+          binder: defaultRabbit

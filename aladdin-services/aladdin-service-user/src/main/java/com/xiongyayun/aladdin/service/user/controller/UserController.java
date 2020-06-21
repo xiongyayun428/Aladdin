@@ -2,6 +2,7 @@ package com.xiongyayun.aladdin.service.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.xiongyayun.aladdin.service.user.service.FileService;
+import com.xiongyayun.aladdin.service.user.service.Message;
 import com.xiongyayun.aladdin.service.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,9 @@ public class UserController {
     @Resource
     private FileService fileService;
 
+    @Resource
+    private Message message;
+
     @Value("${server.port}")
     private String serverPort;
 
@@ -45,5 +49,10 @@ public class UserController {
     @GetMapping("/")
     public String home() {
         return "user index";
+    }
+
+    @GetMapping("/send")
+    public String send() {
+        return message.send();
     }
 }

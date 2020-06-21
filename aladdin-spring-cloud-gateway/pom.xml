@@ -69,11 +69,11 @@
 <!--			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>-->
 <!--		</dependency>-->
 
-		<!-- admin应用监控 -->
-		<dependency>
-			<groupId>de.codecentric</groupId>
-			<artifactId>spring-boot-admin-starter-client</artifactId>
-		</dependency>
+		<!-- admin应用监控, 存在这个就在Zipkin服务端容易出问题，注释掉反而没问题，而且还能用，奇怪了 -->
+<!--		<dependency>-->
+<!--			<groupId>de.codecentric</groupId>-->
+<!--			<artifactId>spring-boot-admin-starter-client</artifactId>-->
+<!--		</dependency>-->
 		<!-- Nacos注册中心客户端 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
