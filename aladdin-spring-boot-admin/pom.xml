@@ -70,10 +70,10 @@
 			<artifactId>spring-boot-admin-server-ui</artifactId>
 		</dependency>
 		<!-- 邮件 -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-mail</artifactId>-->
+<!--		</dependency>-->
 		<!-- 加密 -->
 		<dependency>
 			<groupId>com.github.ulisesbocchio</groupId>
@@ -89,6 +89,10 @@
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.xiongyayun.boot</groupId>
+			<artifactId>athena-spring-boot-autoconfigure</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -1,7 +1,5 @@
 package com.xiongyayun.aladdin.service.user.service;
 
-import org.springframework.stereotype.Component;
-
 /**
  * UserService
  *
@@ -9,4 +7,6 @@ import org.springframework.stereotype.Component;
  * @date 2020/6/14
  */
 public interface UserService {
+
+    int add();
 }

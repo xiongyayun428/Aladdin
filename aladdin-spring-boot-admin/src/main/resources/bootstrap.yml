@@ -7,8 +7,14 @@ spring:
         brand: "<img src='static/img/icon-spring-boot-admin.svg'><span>阿拉丁应用监控管理</span>"
       notify:
         mail:
+          # 发送邮箱
           from: xiongyayun428@163.com
+          # 接收者邮箱列表，以逗号分隔
           to: xiongyayun@prolinkwm.com
+          # 抄送者邮箱列表，以逗号分隔
+          cc:
+            - xiongyayun@prolinkwm.com
+            - xiongyayun@prolinkwm.com
   application:
     name: aladdin-admin-server
   cloud:

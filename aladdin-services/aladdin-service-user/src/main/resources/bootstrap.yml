@@ -16,6 +16,9 @@ spring:
           - data-id: log.yml
             group: "DEV_GROUP"
             refresh: true
+          - data-id: sentinel.yml
+            group: "DEFAULT_GROUP"
+            refresh: true
           - data-id: springboot-admin-client.yaml
             group: "DEFAULT_GROUP"
             refresh: true

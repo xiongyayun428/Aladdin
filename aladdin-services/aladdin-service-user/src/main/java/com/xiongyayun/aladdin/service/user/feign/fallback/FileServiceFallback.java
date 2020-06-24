@@ -1,5 +1,6 @@
-package com.xiongyayun.aladdin.service.user.service;
+package com.xiongyayun.aladdin.service.user.feign.fallback;
 
+import com.xiongyayun.aladdin.service.user.feign.FileService;
 import org.springframework.stereotype.Component;
 
 /**

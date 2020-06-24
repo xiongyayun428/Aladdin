@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--scan自动扫描重新加载配置 scanPeriod重新加载配置的周期-->
+<configuration scan="true" scanPeriod="10 seconds">
+    <!-- https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/resources/org/springframework/boot/logging/logback/defaults.xml -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!-- 属性文件:在配置文件中找到对应的配置项 -->
+    <springProperty scope="context" name="spring.application.name" source="spring.application.name" defaultValue="aladdin"/>
+    <springProperty scope="context" name="logFilePath" source="logging.file.path" defaultValue="logs"/>
+    <springProperty scope="context" name="logFileName" source="logging.file.name" defaultValue="${spring.application.name}.log"/>
+
+    <!-- 彩色日志格式 -->
+<!--    <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{HH:mm:ss.SSS}){faint} %clr(%5p) %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wEx"/>-->
+    <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%thread]){faint} %clr(%-40.40logger{39}){cyan} %L %clr(->){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } --- [%t] %-40.40logger{39} : %m%n%wEx"/>
+
+    <!-- 日志文件保留天数 -->
+    <property name="MAX_HISTORY" value="10"/>
+    <!-- 单个日志文件最大值 -->
+    <property name="MAX_FILE_SIZE" value="100MB"/>
+    <!-- 日志总共大小不超过20GB -->
+    <property name="TOTAL_SIZE_CAP" value="20GB"/>
+
+<!--    <property resource="bootstrap.yml"/>-->
+    <!-- 为了在JVM虚拟机退出之前，能将日志线程的队列中的日志处理完毕，需要注册一个shutdown hook -->
+    <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>
+
+    <appender name="CONSOLE-LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    <!--获取比info级别高(包括info级别)但除error级别的日志-->
+    <appender name="INFO-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logFilePath}/${logFileName}.info</File>
+        <!-- 指定过滤策略: 级别过滤器 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <!-- 指定收集策略：滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+            <fileNamePattern>${logFilePath}/%d{yyyy-MM-dd}/${logFileName}.info.%i.gz</fileNamePattern>
+            <maxFileSize>${MAX_FILE_SIZE}</maxFileSize>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <appender name="ERROR-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logFilePath}/${logFileName}.error</File>
+        <!-- 指定过滤策略: 阈值过滤器 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 拒绝所有等级低于ERROR的事件 -->
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logFilePath}/%d{yyyy-MM-dd}/${logFileName}.error.gz</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 异步输出 -->
+    <appender name="ASYNC-INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <!-- 默认情况下，当BlockingQueue还有20%容量，他将丢弃TRACE、DEBUG和INFO级别的event，只保留WARN和ERROR级别的event。为了保持所有的events，设置该值为0 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>512</queueSize>
+        <!-- 队列满了不阻塞调用者-->
+        <neverBlock>true</neverBlock>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref="INFO-LOG"/>
+    </appender>
+
+    <appender name="ASYNC-ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <neverBlock>true</neverBlock>
+        <appender-ref ref="ERROR-LOG"/>
+    </appender>
+
+    <springProfile name="dev,test">
+        <!-- 开发，测试时候激活 -->
+        <root level="debug">
+            <appender-ref ref="CONSOLE-LOG"/>
+        </root>
+    </springProfile>
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE-LOG"/>
+        <appender-ref ref="ASYNC-INFO"/>
+        <appender-ref ref="ASYNC-ERROR"/>
+    </root>
+</configuration>

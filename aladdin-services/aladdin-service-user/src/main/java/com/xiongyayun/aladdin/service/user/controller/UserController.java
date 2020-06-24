@@ -1,9 +1,8 @@
 package com.xiongyayun.aladdin.service.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.xiongyayun.aladdin.service.user.service.FileService;
+import com.xiongyayun.aladdin.service.user.feign.FileService;
 import com.xiongyayun.aladdin.service.user.service.Message;
-import com.xiongyayun.aladdin.service.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;

@@ -86,6 +86,11 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
+        <!-- Sentinel流控规则持久化到Nacos -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
         <!-- Sleuth + Zipkin分布式请求链路跟踪 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

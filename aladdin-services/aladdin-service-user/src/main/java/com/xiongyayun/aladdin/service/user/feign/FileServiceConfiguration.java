@@ -1,4 +1,4 @@
-package com.xiongyayun.aladdin.service.user.service;
+package com.xiongyayun.aladdin.service.user.feign;
 
 import feign.Logger;
 import org.springframework.context.annotation.Bean;

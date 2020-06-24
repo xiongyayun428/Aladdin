@@ -1,5 +1,6 @@
-package com.xiongyayun.aladdin.service.user.service;
+package com.xiongyayun.aladdin.service.user.feign;
 
+import com.xiongyayun.aladdin.service.user.feign.fallback.FileServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
