@@ -1,11 +1,10 @@
-package com.xiongyayun.aladdin.service.user;
+package com.xiongyayun.aladdin.service.id;
 
+import com.sankuai.inf.leaf.plugin.annotation.EnableLeafServer;
 import lombok.extern.slf4j.Slf4j;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 
@@ -21,12 +20,11 @@ import java.net.UnknownHostException;
 @Slf4j
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = "com.xiongyayun.aladdin")
-@MapperScan("com.xiongyayun.aladdin.service.user.mapper")
-public class UserApplication {
+@EnableLeafServer
+public class LeafApplication {
 
     public static void main(String[] args) throws UnknownHostException {
-        ConfigurableApplicationContext context = SpringApplication.run(UserApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(LeafApplication.class, args);
         Environment env = context.getEnvironment();
         String port = env.getProperty("server.port"), contextPath = env.getProperty("server.servlet.context-path", "");
         log.info("\n--------------------------------------------------------------------------------------------------------------------\n\t" +

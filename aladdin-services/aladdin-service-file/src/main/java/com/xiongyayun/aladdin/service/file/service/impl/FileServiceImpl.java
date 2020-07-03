@@ -1,9 +1,21 @@
 package com.xiongyayun.aladdin.service.file.service.impl;
 
 import com.xiongyayun.aladdin.service.file.service.FileService;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.Tika;
+import org.apache.tika.config.TikaConfig;
+import org.apache.tika.detect.Detector;
+import org.apache.tika.metadata.Metadata;
+import org.apache.tika.mime.MediaType;
+import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.parser.ParseContext;
+import org.apache.tika.parser.Parser;
+import org.apache.tika.sax.BodyContentHandler;
 import org.springframework.stereotype.Service;
+import org.xml.sax.ContentHandler;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * FileServiceImpl
@@ -11,6 +23,7 @@ import java.io.File;
  * @author Yayun.Xiong
  * @date 2020/6/14
  */
+@Slf4j
 @Service
 public class FileServiceImpl implements FileService {
     /**
@@ -47,6 +60,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public void download(File file) {
         System.out.println("-------download-----");
+        Tika tika = new Tika();
+        try {
+            tika.detect(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -69,4 +88,69 @@ public class FileServiceImpl implements FileService {
     public void preview(File file) {
         System.out.println("-------preview-----");
     }
+
+    private static String getMimeType(File file) {
+        if (file.isDirectory()) {
+            log.warn("the target is a directory");
+            return null;
+        }
+        InputStream is = null;
+        BufferedInputStream bis = null;
+        try {
+            is = new FileInputStream(file);
+            bis = new BufferedInputStream(is);
+            AutoDetectParser parser = new AutoDetectParser();
+            Detector detector = parser.getDetector();
+            Metadata metadata = new Metadata();
+            metadata.add(Metadata.RESOURCE_NAME_KEY, file.getName());
+            MediaType mediaType = detector.detect(bis, metadata);
+            System.out.println(mediaType.getSubtype());
+            System.out.println(mediaType.getType());
+            return mediaType.toString();
+        } catch (Exception e) {
+            log.error("getMimeType is error" + e.getMessage(), e);
+            return null;
+        } finally {
+            if (bis != null) {
+                try {
+                    bis.close();
+                } catch (IOException ee) {}
+            }
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException ee) {}
+            }
+        }
+    }
+
+    @SneakyThrows
+    public static void main(String[] args) {
+        File file = new File("/Users/xyy/Pictures/xiong");
+        InputStream is = new FileInputStream(file);
+        BufferedInputStream bis = new BufferedInputStream(is);
+
+        String mimeType = getMimeType(file);
+        System.out.println(mimeType);
+        System.out.println("------------------");
+        Tika tika = new Tika();
+        System.out.println(tika.detect(file));
+        System.out.println("+++++++++++++++++");
+
+        TikaConfig tikaConfig = new TikaConfig();
+        Metadata metadata = new Metadata();
+        metadata.set(Metadata.RESOURCE_NAME_KEY, file.getName());
+        MediaType mimetype = tikaConfig.getDetector().detect(bis, metadata);
+        System.out.println(mimetype.toString());
+        System.out.println("-------------");
+
+        Parser parser= new AutoDetectParser();
+        int writerHandler =-1;
+        ContentHandler contentHandler= new BodyContentHandler(writerHandler);
+        metadata= new Metadata();
+        parser.parse(bis, contentHandler, metadata, new ParseContext());
+        String mt = metadata.get(Metadata.CONTENT_TYPE);
+        System.out.println("File Attachment: "+file.getName()+" MimeType is: "+mt);
+    }
+
 }

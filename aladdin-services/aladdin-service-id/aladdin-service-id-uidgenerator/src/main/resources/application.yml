@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: aladdin-service-uidgenerator
+  boot:
+    admin:
+      client:
+        enabled: false
+mybatis:
+  # 指定sql映射文件位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

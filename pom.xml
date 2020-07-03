@@ -39,10 +39,35 @@
 
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
             <scope>provided</scope>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.springfox</groupId>-->
+<!--            <artifactId>springfox-boot-starter</artifactId>-->
+<!--            <version><version></version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.10.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>2.10.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.10.5</version>
         </dependency>
     </dependencies>
 
@@ -135,6 +160,7 @@
                 <configuration>
                     <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
+                    <!-- 重复生成是否覆盖源文件 -->
                     <overwrite>true</overwrite>
                 </configuration>
                 <executions>
@@ -145,6 +171,24 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <!-- 1.4.0 版本在使用tk.mybatis时会报错 -->
+                        <version>1.3.7</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.xiongyayun</groupId>
+                        <artifactId>mybatis-generator</artifactId>
+                        <version>0.0.1-SNAPSHOT</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>4.1.5</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -154,7 +198,7 @@
             <id>local-repo</id>
             <activation>
                 <!--默认激活配置-->
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <!-- 仓库配置 -->
             <repositories>

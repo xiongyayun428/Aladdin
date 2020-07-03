@@ -17,7 +17,16 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <artifactId>leaf-boot-starter</artifactId>
+            <groupId>com.sankuai.inf.leaf</groupId>
+            <version>1.0.1-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
 </project>

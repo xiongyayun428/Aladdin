@@ -1,0 +1,9 @@
+server:
+  port: 8104
+spring:
+  application:
+    name: aladdin-service-leaf
+  boot:
+    admin:
+      client:
+        enabled: false

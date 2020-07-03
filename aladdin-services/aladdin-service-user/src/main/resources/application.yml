@@ -51,19 +51,18 @@ seata:
     disable-global-transaction: false # 禁用全局事务（默认false）
   transport:
     enable-client-batch-send-request: true # 客户端事务消息请求是否批量合并发送（默认true）
-  registry:
-    type: nacos
-    nacos:
-      server-addr: 10.0.1.25:80
-      username: nacos
-      password: nacos
-      group: "DEV_GROUP"
-      namespace: "4386b803-ea26-4dcb-b7c5-951db0b64f52"
-  config:
-    type: nacos
-    nacos:
-      server-addr: 10.0.1.25:80
-      username: nacos
-      password: nacos
-      group: "DEV_GROUP"
-      namespace: "4386b803-ea26-4dcb-b7c5-951db0b64f52"
+
+mybatis:
+  type-aliases-package: com.xiongyayun.aladdin.service.user.model
+  mapper-locations: classpath:mappers/*.xml
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
