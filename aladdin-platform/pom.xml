@@ -19,6 +19,7 @@
 
     <modules>
         <module>aladdin-common</module>
+        <module>aladdin-generator</module>
     </modules>
 
     <dependencies>

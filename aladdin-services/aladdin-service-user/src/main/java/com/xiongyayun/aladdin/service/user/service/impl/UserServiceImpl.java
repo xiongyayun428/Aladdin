@@ -1,5 +1,9 @@
 package com.xiongyayun.aladdin.service.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiongyayun.aladdin.service.user.mapper.UserMapper;
 import com.xiongyayun.aladdin.service.user.model.User;
 import com.xiongyayun.aladdin.service.user.service.UserService;
@@ -25,6 +29,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int updateById(User user) {
+        return userMapper.updateById(user);
+    }
+
+    @Override
+    public int update(User user) {
+        return userMapper.update(user, Wrappers.<User>lambdaUpdate()
+                .eq(User::getUserId, user.getUserId())
+        );
+    }
+
+    @Override
     public int updateByPrimaryKey(User user) {
         return userMapper.updateById(user);
 //        return userMapper.updateByPrimaryKey(user);
@@ -37,9 +53,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int deleteById(Long userId) {
+        return userMapper.deleteById(userId);
+    }
+
+    @Override
     public int delete(User user) {
-        return 0;
-//        return userMapper.delete(user);
+        return userMapper.delete(Wrappers.lambdaQuery(user));
     }
 
     @Override
@@ -53,5 +73,14 @@ public class UserServiceImpl implements UserService {
         return null;
 //        PageHelper.startPage(pageNum, pageSize);
 //        return userMapper.select(user);
+    }
+
+    public List<User> selectList(User user) {
+        return userMapper.selectList(Wrappers.lambdaQuery(user));
+    }
+
+    public IPage<User> selectPage(User user, int pageNum, int pageSize) {
+        Page<User> page = new Page<>(pageNum, pageSize);
+        return userMapper.selectPage(page, Wrappers.lambdaQuery(user));
     }
 }

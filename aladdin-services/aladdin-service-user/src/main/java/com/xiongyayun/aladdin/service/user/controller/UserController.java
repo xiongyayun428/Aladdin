@@ -5,10 +5,12 @@ import com.xiongyayun.aladdin.service.user.feign.FileService;
 import com.xiongyayun.aladdin.service.user.model.User;
 import com.xiongyayun.aladdin.service.user.service.Message;
 import com.xiongyayun.aladdin.service.user.service.UserService;
+import com.xiongyayun.aladdin.service.user.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
@@ -96,7 +98,10 @@ public class UserController {
 
     @ApiOperation("查询用户明细")
     @GetMapping(value = "/{userId}")
-    public User getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
-        return userService.selectByPrimaryKey(userId);
+    public UserVo getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
+        User user = userService.selectByPrimaryKey(userId);
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        return userVo;
     }
 }

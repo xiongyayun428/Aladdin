@@ -23,6 +23,31 @@ public interface UserService {
 
     int updateByPrimaryKeySelective(User user);
 
+    /**
+     * 根据用户ID修改用户
+     * @param user
+     * @return
+     */
+    int updateById(User user);
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    int update(User user);
+
+    /**
+     * 根据用户ID删除用户
+     * @param userId
+     * @return
+     */
+    int deleteById(Long userId);
+
+    /**
+     * 根据用户所有字段匹配删除用户
+     * @param user
+     * @return
+     */
     int delete(User user);
 
     User selectByPrimaryKey(Long userId);
