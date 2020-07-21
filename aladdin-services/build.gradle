@@ -1,0 +1,23 @@
+description = "通用服务"
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web") {
+        exclude(group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat')
+    }
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+    // 健康监控
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    // 测试
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    // 热部署
+    runtimeOnly("org.springframework.boot:spring-boot-devtools")
+//    developmentOnly("org.springframework.boot:spring-boot-devtools")
+    // Admin应用监控
+    runtimeOnly("de.codecentric:spring-boot-admin-starter-client")
+    // Nacos注册中心客户端
+    runtimeOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery")
+    // Nacos配置中心客户端
+    runtimeOnly("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config")
+}

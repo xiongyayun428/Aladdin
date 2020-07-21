@@ -1,0 +1,4 @@
+//rootProject.name = 'aladdin-spring-cloud-gateway'
+//includeFlat 'aladdin-platform'
+//include 'aladdin-platform:aladdin-common'
+//include 'aladdin-platform:aladdin-generator'

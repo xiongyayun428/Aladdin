@@ -1,0 +1,205 @@
+import java.text.SimpleDateFormat
+
+buildscript {
+    ext {
+        springBootVersion = '2.3.1.RELEASE'
+    }
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+}
+
+ext {
+    configuration = [
+            javaVersion = JavaVersion.VERSION_1_8
+    ]
+    libraries = [
+            athenaSpringBootVersion = '0.0.1-SNAPSHOT'
+    ]
+    versions = [
+            lombok : '1.18.12',
+            junit  : '4.13',
+            athena : [
+                    boot: '0.0.1-SNAPSHOT'
+            ],
+            spring : [
+                    spring_framework: '5.2.7.RELEASE',
+                    spring_boot     : '2.3.1.RELEASE',
+                    spring_cloud    : 'Hoxton.SR6'
+            ],
+            alibaba: [
+                    druid   : '1.1.23',
+                    fastjson: '1.2.72',
+                    cloud   : '2.2.1.RELEASE',
+                    nacos   : '0.2.7',
+            ]
+    ]
+    libs = [
+            'lombok'                   : "org.projectlombok:lombok:$versions.lombok",
+            'junit'                    : "junit:junit:$versions.junit",
+            'spring-boot-gradle-plugin': "org.springframework.boot:spring-boot-gradle-plugin:$versions.spring.spring_boot",
+            'alibaba'                  : "com.alibaba:fastjson:${versions.alibaba.fastjson}",
+            'nacos-config'             : "com.alibaba.boot:nacos-config-spring-boot-starter:$versions.alibaba.nacos",
+            'nacos-discovery'          : "com.alibaba.boot:nacos-discovery-spring-boot-starter:$versions.alibaba.nacos",
+    ]
+}
+
+description = "阿拉丁"
+
+repositories {
+    mavenLocal()
+    maven {
+        name("aliyun")
+        url 'http://maven.aliyun.com/nexus/content/groups/public'
+    }
+    maven {
+        name("rdc-releases")
+        credentials {
+            username 'jCWG1k'
+            password 'jSeNQf22gp'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/'
+    }
+    maven {
+        name("rdc-snapshots")
+        credentials {
+            username 'jCWG1k'
+            password 'jSeNQf22gp'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/'
+    }
+    mavenCentral()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 解决编译java时警告：请使用 -Xlint:unchecked 重新编译
+compileJava {
+    options.compilerArgs << '-Xlint:unchecked' << '-Xlint:deprecation' << '-parameters'
+//    options.forkOptions.jvmArgs << '-parameters'
+}
+
+compileTestJava {
+    options.compilerArgs << "-parameters"
+}
+
+// 所有模块/项目的通用配置
+allprojects {
+    group = 'com.xiongyayun.aladdin'
+    version = "0.0.1-SNAPSHOT"
+
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+}
+
+// 子模块/项目的统一配置
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'signing'
+    apply plugin: 'maven-publish'
+
+    sourceCompatibility = "${javaVersion}"
+    targetCompatibility = "${javaVersion}"
+
+    /* java编译的时候缺省状态下会因为中文字符而失败 */
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    ext { // 依赖版本
+        springBootVersion = "2.3.1.RELEASE"
+        junitVersion = "4.13"
+    }
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+        options.warnings = false
+        options.deprecation = true
+        options.compilerArgs += ["-parameters"]
+    }
+
+    tasks.withType(GenerateModuleMetadata) {
+        enabled = false
+    }
+
+    jar {
+        afterEvaluate {
+            manifest {
+                attributes 'Implementation-Version': archiveVersion
+                attributes 'Built-Gradle': gradle.gradleVersion
+                attributes 'Bundle-DocURL': 'http://www.xiongyayun.com/'
+                attributes 'Build-OS': System.getProperty("os.name")
+                attributes 'Built-By': System.getProperty("user.name")
+                attributes 'Build-Jdk': System.getProperty("java.version")
+                attributes 'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())
+            }
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven { url "https://maven.aliyun.com/repository/public" }
+//        maven {
+//            name("rdc-releases")
+//            url 'https://repo.rdc.aliyun.com/repository/36686-release-5eLHg3/'
+//        }
+//        maven {
+//            name("rdc-snapshots")
+//            url 'https://repo.rdc.aliyun.com/repository/36686-snapshot-o575SR/'
+//        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        // 单元测试
+//		testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+//		testImplementation("junit:junit:${junitVersion}")
+
+//        implementation platform('com.xiongyayun.boot:athena-spring-boot-dependencies:0.0.1-SNAPSHOT')
+//        implementation platform('com.xiongyayun.cloud:athena-spring-cloud-dependencies:0.0.1-SNAPSHOT')
+    }
+
+//    dependencyManagement {
+//        imports {
+//            mavenBom "org.springframework.cloud:spring-cloud-dependencies:2.3.1.RELEASE"
+//            mavenBom "com.xiongyayun.boot:athena-spring-boot-dependencies:$versions.athena.boot"
+//        }
+//    }
+}
+
+//configure(allprojects.findAll { it.name.startsWith('aladdin-service') }) {
+//
+//}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:2.3.1.RELEASE"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Hoxton.SR6"
+//        mavenBom "com.xiongyayun.boot:athena-spring-boot-dependencies:0.0.1-SNAPSHOT"
+//        mavenBom "com.xiongyayun.cloud:athena-spring-cloud-dependencies:0.0.1-SNAPSHOT"
+    }
+
+    resolutionStrategy {
+//        failOnVersionConflict()
+//        preferProjectModules()
+        // 检查远程依赖是否存在更新
+//        cacheChangingModulesFor 0, 'seconds' // 修改本地缓存策略: 不缓存
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+

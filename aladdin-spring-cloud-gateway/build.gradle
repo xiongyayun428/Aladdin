@@ -1,0 +1,12 @@
+description = "服务网关"
+
+dependencies {
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation(enforcedPlatform(project(":aladdin-platform:aladdin-common")))
+    implementation project(':aladdin-platform:aladdin-common')
+//    implementation project(":aladdin-spring-boot-admin")
+//    api project(":aladdin-common")
+//    implementation platform("com.xiongyayun.boot:athena-spring-boot-dependencies:${athenaSpringBootVersion}")
+
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+}

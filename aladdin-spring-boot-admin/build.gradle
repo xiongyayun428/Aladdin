@@ -1,0 +1,6 @@
+description = "应用健康检查后台管理"
+
+dependencies {
+//    implementation platform("com.xiongyayun.boot:athena-spring-boot-dependencies:${athenaSpringBootVersion}")
+//    implementation("org.springframework.boot:spring-boot-starter-web")
+}

@@ -1,0 +1,29 @@
+//pluginManagement {
+//    repositories {
+//        maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
+//        maven { url "https://maven.aliyun.com/nexus/content/repositories/gradle-plugin" }
+//        mavenLocal()
+//        mavenCentral()
+//        gradlePluginPortal()
+//        maven { url "https://plugins.gradle.org/m2/" }
+//    }
+//}
+
+rootProject.name = 'Aladdin'
+// 子模块引用
+include 'aladdin-platform'
+include ':aladdin-platform:aladdin-common'
+//include ':aladdin-platform:aladdin-generator'
+
+//include 'aladdin-services'
+include("aladdin-services:aladdin-service-file")
+include("aladdin-services:aladdin-service-id")
+include("aladdin-services:aladdin-service-system")
+include("aladdin-services:aladdin-service-user")
+
+include 'aladdin-spring-boot-admin'
+include 'aladdin-spring-cloud-gateway'
+
+file("${rootDir}/aladdin-services/aladdin-service-id").eachDirMatch(~/aladdin-service-id.*/) {
+    include "aladdin-services:aladdin-service-id:${it.name}"
+}

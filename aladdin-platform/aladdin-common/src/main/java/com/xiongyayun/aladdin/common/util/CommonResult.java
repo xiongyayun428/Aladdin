@@ -1,7 +1,6 @@
 package com.xiongyayun.aladdin.common.util;
 
 import com.xiongyayun.aladdin.common.constant.CommonConstants;
-import lombok.*;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
