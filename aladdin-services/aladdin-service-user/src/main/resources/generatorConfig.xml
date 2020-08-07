@@ -55,7 +55,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://47.107.179.245:3306/athena?connectTimeout=1000&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"
+                        connectionURL="jdbc:mysql://47.107.179.245:3306/athena?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useUnicode=true&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"
                         userId="athena"
                         password="athena">
             <property name="useInformationSchema" value="true"/>

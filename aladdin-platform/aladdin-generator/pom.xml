@@ -20,6 +20,8 @@
         <dependency>
 		    <groupId>com.baomidou</groupId>
 		    <artifactId>mybatis-plus-generator</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
 		</dependency>
         <dependency>
             <groupId>org.freemarker</groupId>

@@ -1,18 +1,22 @@
 package com.xiongyayun.aladdin.service.user.model;
 
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @ApiModel("用户基础信息表")
 @Table(name = "`user`")
+@TableName(value = "user", schema = "athena")
 public class User implements Serializable {
     /**
      * 用户主键ID
+     * 注意：selectById方法默认使用的主键名是id,数据库表中如果主键id名称不一样需要手动指定,使用@TableId注解标记主键id为user_id
      */
-    @Id
+    @TableId("user_id")
     @Column(name = "`user_id`")
     @ApiModelProperty("用户主键ID")
     private Long userId;
@@ -22,6 +26,7 @@ public class User implements Serializable {
      */
     @Column(name = "`user_name`")
     @ApiModelProperty("用户名")
+    @TableField(condition = SqlCondition.LIKE_RIGHT)
     private String userName;
 
     /**
@@ -29,6 +34,7 @@ public class User implements Serializable {
      */
     @Column(name = "`real_name`")
     @ApiModelProperty("真实姓名")
+    @Size(min = 2, max = 20, message = "用户名长度必须为2-20个字符")
     private String realName;
 
     /**
@@ -57,6 +63,7 @@ public class User implements Serializable {
      */
     @Column(name = "`status`")
     @ApiModelProperty("状态")
+    @TableField(value = "`status`", fill = FieldFill.INSERT)
     private Integer status;
 
     /**
@@ -64,6 +71,7 @@ public class User implements Serializable {
      */
     @Column(name = "`last_visit_ip`")
     @ApiModelProperty("最近登录的IP地址")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastVisitIp;
 
     /**
@@ -71,6 +79,7 @@ public class User implements Serializable {
      */
     @Column(name = "`last_visit_date`")
     @ApiModelProperty("最近登录的时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date lastVisitDate;
 
     /**
@@ -106,6 +115,7 @@ public class User implements Serializable {
      */
     @Column(name = "`create_user`")
     @ApiModelProperty("创建用户")
+    @TableField(fill = FieldFill.INSERT)
     private String createUser;
 
     /**
@@ -113,6 +123,7 @@ public class User implements Serializable {
      */
     @Column(name = "`create_time`")
     @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
@@ -120,6 +131,7 @@ public class User implements Serializable {
      */
     @Column(name = "`last_update_user`")
     @ApiModelProperty("最后更新用户")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String lastUpdateUser;
 
     /**
@@ -127,6 +139,7 @@ public class User implements Serializable {
      */
     @Column(name = "`last_update_time`")
     @ApiModelProperty("最后更新时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date lastUpdateTime;
 
     private static final long serialVersionUID = 1L;
@@ -492,31 +505,31 @@ public class User implements Serializable {
         return result;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", userId=").append(userId);
-        sb.append(", userName=").append(userName);
-        sb.append(", realName=").append(realName);
-        sb.append(", nickName=").append(nickName);
-        sb.append(", accessIp=").append(accessIp);
-        sb.append(", accessMac=").append(accessMac);
-        sb.append(", status=").append(status);
-        sb.append(", lastVisitIp=").append(lastVisitIp);
-        sb.append(", lastVisitDate=").append(lastVisitDate);
-        sb.append(", visitCount=").append(visitCount);
-        sb.append(", visitDate=").append(visitDate);
-        sb.append(", errorTimes=").append(errorTimes);
-        sb.append(", allowDelete=").append(allowDelete);
-        sb.append(", createUser=").append(createUser);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", lastUpdateUser=").append(lastUpdateUser);
-        sb.append(", lastUpdateTime=").append(lastUpdateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(getClass().getSimpleName());
+//        sb.append(" [");
+//        sb.append("Hash = ").append(hashCode());
+//        sb.append(", userId=").append(userId);
+//        sb.append(", userName=").append(userName);
+//        sb.append(", realName=").append(realName);
+//        sb.append(", nickName=").append(nickName);
+//        sb.append(", accessIp=").append(accessIp);
+//        sb.append(", accessMac=").append(accessMac);
+//        sb.append(", status=").append(status);
+//        sb.append(", lastVisitIp=").append(lastVisitIp);
+//        sb.append(", lastVisitDate=").append(lastVisitDate);
+//        sb.append(", visitCount=").append(visitCount);
+//        sb.append(", visitDate=").append(visitDate);
+//        sb.append(", errorTimes=").append(errorTimes);
+//        sb.append(", allowDelete=").append(allowDelete);
+//        sb.append(", createUser=").append(createUser);
+//        sb.append(", createTime=").append(createTime);
+//        sb.append(", lastUpdateUser=").append(lastUpdateUser);
+//        sb.append(", lastUpdateTime=").append(lastUpdateTime);
+//        sb.append(", serialVersionUID=").append(serialVersionUID);
+//        sb.append("]");
+//        return sb.toString();
+//    }
 }

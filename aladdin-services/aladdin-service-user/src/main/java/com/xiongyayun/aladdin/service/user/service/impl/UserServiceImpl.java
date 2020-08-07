@@ -1,12 +1,11 @@
 package com.xiongyayun.aladdin.service.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xiongyayun.aladdin.service.user.mapper.UserMapper;
 import com.xiongyayun.aladdin.service.user.model.User;
 import com.xiongyayun.aladdin.service.user.service.UserService;
+import com.xiongyayun.athena.core.pagination.mybatisplus.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -75,12 +74,23 @@ public class UserServiceImpl implements UserService {
 //        return userMapper.select(user);
     }
 
+    @Override
     public List<User> selectList(User user) {
-        return userMapper.selectList(Wrappers.lambdaQuery(user));
+        return userMapper.selectList(Wrappers.lambdaQuery(user).orderByAsc(User::getLastUpdateTime));
     }
 
+    @Override
     public IPage<User> selectPage(User user, int pageNum, int pageSize) {
-        Page<User> page = new Page<>(pageNum, pageSize);
-        return userMapper.selectPage(page, Wrappers.lambdaQuery(user));
+        Page<User> page = new Page(pageNum, pageSize);
+        return userMapper.selectPage(page, Wrappers.lambdaQuery(user)
+//                .or()
+//                .likeLeft(User::getUserName, user.getUserName())
+                .orderByAsc(User::getLastUpdateTime)
+        );
+    }
+
+    @Override
+    public User selectById(Long userId) {
+        return userMapper.selectById(userId);
     }
 }

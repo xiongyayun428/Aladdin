@@ -5,8 +5,10 @@ import com.xiongyayun.aladdin.service.file.service.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 /**
@@ -61,6 +63,13 @@ public class FileController {
     }
     public File[] getFileByIds(String[] fileIds) {
         return new File[]{new File("/Users/xyy/Desktop/B41A8371.jpg")};
+    }
+
+
+    @PostMapping("/upload")
+    public void upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws Exception {
+        // 保存文件并创建UploadFile上传记录
+//        return super.uploadFile(file, Dictionary.class, request);
     }
 
 }

@@ -1,11 +1,14 @@
 package com.xiongyayun.aladdin.service.user.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiongyayun.aladdin.service.user.feign.FileService;
 import com.xiongyayun.aladdin.service.user.model.User;
 import com.xiongyayun.aladdin.service.user.service.Message;
 import com.xiongyayun.aladdin.service.user.service.UserService;
 import com.xiongyayun.aladdin.service.user.vo.UserVo;
+import com.xiongyayun.athena.core.annotation.Logger;
+import com.xiongyayun.athena.core.exception.AthenaRuntimeException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,7 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@Api(tags = "UserController", description = "用户")
+@Api(tags = {"UserController", "用户"})
 @RequestMapping("/user")
 @RefreshScope
 public class UserController {
@@ -42,10 +46,13 @@ public class UserController {
     private UserService userService;
 
 
-    @GetMapping("/get")
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_XML_VALUE)
     @SentinelResource("get")
-    public String get() {
-        return "UserController get >" + serverPort;
+    public User get() {
+        User user = new User();
+        user.setUserId(2L);
+        user.setUserName("熊大大");
+        return user;
     }
 
     @GetMapping("/download")
@@ -55,8 +62,8 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String home() {
-        return "user index";
+    public List<User> home(User user) {
+        return userService.selectList(user);
     }
 
     @GetMapping("/send")
@@ -72,9 +79,10 @@ public class UserController {
     }
 
     @ApiOperation("修改用户")
+    @Logger("修改用户")
     @PostMapping("/update")
     public void updateUser() {
-
+        throw new AthenaRuntimeException("测试错误");
     }
 
     @ApiOperation("删除单个用户")
@@ -96,12 +104,35 @@ public class UserController {
 
     }
 
-    @ApiOperation("查询用户明细")
-    @GetMapping(value = "/{userId}")
-    public UserVo getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
-        User user = userService.selectByPrimaryKey(userId);
-        UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(user, userVo);
-        return userVo;
+//    @ApiOperation("查询用户明细")
+//    @GetMapping(value = "/{userId}")
+//    public UserVo getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
+//        User user = userService.selectById(userId);
+//        UserVo userVo = new UserVo();
+//        if (user != null) {
+//            BeanUtils.copyProperties(user, userVo);
+//        }
+//        return userVo;
+//    }
+
+    @Logger(value = "根据用户ID查询用户明细", save = true)
+    @ApiOperation("根据用户ID查询用户明细")
+    @RequestMapping(value = "/id/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public User getUserById(@ApiParam("用户ID") @PathVariable Long userId) {
+        return userService.selectById(userId);
+    }
+
+    @Logger(value = "查询所有用户明细", save = true)
+    @ApiOperation("查询所有用户明细")
+    @GetMapping(value = "/list")
+    public List<User> list(User user) {
+        return userService.selectList(user);
+    }
+
+    @Logger(value = "分页查询用户明细", save = true)
+    @ApiOperation("分页查询用户明细")
+    @GetMapping(value = "/page")
+    public IPage<User> page(User user) {
+        return userService.selectPage(user, 1, 10);
     }
 }

@@ -1,5 +1,6 @@
 package com.xiongyayun.aladdin.service.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiongyayun.aladdin.service.user.model.User;
 
 import java.util.List;
@@ -53,4 +54,27 @@ public interface UserService {
     User selectByPrimaryKey(Long userId);
 
     List<User> selectUser(User user, int pageNum, int pageSize);
+
+    /**
+     * 根据用户ID查询用户
+     * @param userId
+     * @return
+     */
+    User selectById(Long userId);
+
+    /**
+     * 查询全部用户信息
+     * @param user
+     * @return
+     */
+    List<User> selectList(User user);
+
+    /**
+     * 分页查询用户信息
+     * @param user
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    IPage<User> selectPage(User user, int pageNum, int pageSize);
 }

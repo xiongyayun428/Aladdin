@@ -2,7 +2,7 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 10.0.1.25:80
+        server-addr: 10.8.3.100:8848
         username: nacos
         password: nacos
         file-extension: "yaml"

@@ -42,6 +42,10 @@
             <!--scope包含如下的取值：compile（编译范围）、provided（已提供范围）、runtime（运行时范围）、test（测试范围）、system（系统范围） -->
             <scope>provided</scope>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-json</artifactId>-->
+<!--        </dependency>-->
         <!-- 健康监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,6 +89,13 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <!--去除jackson-dataformat-xml，否则会返回xml文件，而不是JSON-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.dataformat</groupId>
+                    <artifactId>jackson-dataformat-xml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Sentinel流控规则持久化到Nacos -->
         <dependency>
@@ -116,10 +127,14 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.mybatis.spring.boot</groupId>-->
-<!--            <artifactId>mybatis-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>com.github.pagehelper</groupId>-->
 <!--            <artifactId>pagehelper-spring-boot-starter</artifactId>-->
@@ -135,6 +150,12 @@
 <!--        </dependency>-->
 
         <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.10</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.xiongyayun.boot</groupId>
             <artifactId>athena-spring-boot-autoconfigure</artifactId>
         </dependency>
@@ -144,11 +165,12 @@
             <artifactId>aladdin-common</artifactId>
             <version>${revision}</version>
         </dependency>
-
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>com.xiongyayun</groupId>
+            <artifactId>athena-core</artifactId>
+            <version>${revision}</version>
         </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>com.baomidou</groupId>-->
 <!--            <artifactId>mybatis-plus-extension</artifactId>-->

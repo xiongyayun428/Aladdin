@@ -47,6 +47,13 @@
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+			<!--去除jackson-dataformat-xml，否则会返回xml文件，而不是JSON-->
+<!--			<exclusions>-->
+<!--				<exclusion>-->
+<!--					<groupId>com.fasterxml.jackson.dataformat</groupId>-->
+<!--					<artifactId>jackson-dataformat-xml</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
 		</dependency>
 		<!-- Sentinel 网关限流 -->
 		<dependency>

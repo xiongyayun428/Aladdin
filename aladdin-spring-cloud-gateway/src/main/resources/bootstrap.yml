@@ -6,7 +6,7 @@ spring:
     nacos:
       # 配置的优先级 shared-configs < extension-configs < 内部相关规则
       config:
-        server-addr: 10.0.1.25:80
+        server-addr: 10.8.3.100:8848
         username: nacos
         password: nacos
         file-extension: "yaml"
